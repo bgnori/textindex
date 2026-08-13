@@ -67,7 +67,9 @@ phase-a-summary:
 	python3 scripts/phase_a_summary.py phase_a_results.csv
 
 ## download-moby-dick: download Project Gutenberg Moby Dick text (not committed)
-download-moby-dick:
+download-moby-dick: $(DATADIR)/moby_dick.txt
+
+$(DATADIR)/moby_dick.txt:
 	@mkdir -p $(DATADIR)
 	./scripts/download_testdata.sh $(DATADIR)
 
@@ -97,7 +99,9 @@ suffixarray-demo-moby-dick: $(DATADIR)/moby_dick.txt
 suffixarray-demo: suffixarray-demo-moby-dick
 
 ## download-kenshin: download Aozora Bunko 上杉謙信 and convert to UTF-8 (not committed)
-download-kenshin:
+download-kenshin: $(DATADIR)/kenshin.txt
+
+$(DATADIR)/kenshin.txt:
 	@mkdir -p $(DATADIR)
 	./scripts/download_kenshin.sh $(DATADIR)
 
@@ -123,12 +127,16 @@ docker-run:
 	docker compose run textindex
 
 ## download-git: download Git source code (.c/.h files) into data/git-src/
-download-git:
+download-git: $(GIT_SRC_DIR)
+
+$(GIT_SRC_DIR):
 	@mkdir -p $(DATADIR)
 	./scripts/download_git.sh $(DATADIR)
 
 ## download-ecoli: download E. coli K-12 MG1655 genome (FASTA) from NCBI (not committed)
-download-ecoli:
+download-ecoli: $(DATADIR)/ecoli.fna
+
+$(DATADIR)/ecoli.fna:
 	@mkdir -p $(DATADIR)
 	./scripts/download_ecoli.sh $(DATADIR)
 
@@ -164,7 +172,9 @@ download-amazon-small:
 	./scripts/download_kaggle_amazon.sh small $(DATADIR)
 
 ## prepare-amazon-small: preprocess Kaggle Amazon Laptop Prices Dataset to plain text
-prepare-amazon-small:
+prepare-amazon-small: $(AMAZON_SMALL_TEXT)
+
+$(AMAZON_SMALL_TEXT):
 	./scripts/prepare_kaggle_amazon.sh small $(DATADIR) amazon_small.txt
 
 ## download-amazon-medium: download Kaggle Amazon Mobile Dataset (not committed)
@@ -173,7 +183,9 @@ download-amazon-medium:
 	./scripts/download_kaggle_amazon.sh medium $(DATADIR)
 
 ## prepare-amazon-medium: preprocess Kaggle Amazon Mobile Dataset to plain text
-prepare-amazon-medium:
+prepare-amazon-medium: $(AMAZON_MEDIUM_TEXT)
+
+$(AMAZON_MEDIUM_TEXT):
 	./scripts/prepare_kaggle_amazon.sh medium $(DATADIR) amazon_medium.txt
 
 ## download-amazon-large: download Kaggle Amazon Product Dataset (100K+) (not committed)
@@ -182,34 +194,46 @@ download-amazon-large:
 	./scripts/download_kaggle_amazon.sh large $(DATADIR)
 
 ## prepare-amazon-large: preprocess Kaggle Amazon Product Dataset (100K+) to plain text
-prepare-amazon-large:
+prepare-amazon-large: $(AMAZON_LARGE_TEXT)
+
+$(AMAZON_LARGE_TEXT):
 	./scripts/prepare_kaggle_amazon.sh large $(DATADIR) amazon_large.txt
 
 ## generate-fake-logs: generate all 5 fake log datasets (flog + mclogs)
 generate-fake-logs: generate-fake-log-apache-common generate-fake-log-apache-error generate-fake-log-syslog generate-fake-log-json generate-fake-log-logfmt
 
 ## generate-fake-log-apache-common: generate Apache access log via flog
-generate-fake-log-apache-common:
+generate-fake-log-apache-common: $(DATADIR)/fake-logs/flog_apache_common.log
+
+$(DATADIR)/fake-logs/flog_apache_common.log:
 	@mkdir -p $(DATADIR)
 	./scripts/generate_fake_logs.sh apache-common $(FAKE_LOG_SIZE) $(DATADIR)
 
 ## generate-fake-log-apache-error: generate Apache error log via flog
-generate-fake-log-apache-error:
+generate-fake-log-apache-error: $(DATADIR)/fake-logs/flog_apache_error.log
+
+$(DATADIR)/fake-logs/flog_apache_error.log:
 	@mkdir -p $(DATADIR)
 	./scripts/generate_fake_logs.sh apache-error $(FAKE_LOG_SIZE) $(DATADIR)
 
 ## generate-fake-log-syslog: generate Syslog (RFC3164) via flog
-generate-fake-log-syslog:
+generate-fake-log-syslog: $(DATADIR)/fake-logs/flog_syslog.log
+
+$(DATADIR)/fake-logs/flog_syslog.log:
 	@mkdir -p $(DATADIR)
 	./scripts/generate_fake_logs.sh syslog $(FAKE_LOG_SIZE) $(DATADIR)
 
 ## generate-fake-log-json: generate JSON logs via mclogs
-generate-fake-log-json:
+generate-fake-log-json: $(DATADIR)/fake-logs/mclogs_json.log
+
+$(DATADIR)/fake-logs/mclogs_json.log:
 	@mkdir -p $(DATADIR)
 	./scripts/generate_fake_logs.sh json $(FAKE_LOG_SIZE) $(DATADIR)
 
 ## generate-fake-log-logfmt: generate logfmt logs via mclogs
-generate-fake-log-logfmt:
+generate-fake-log-logfmt: $(DATADIR)/fake-logs/mclogs_logfmt.log
+
+$(DATADIR)/fake-logs/mclogs_logfmt.log:
 	@mkdir -p $(DATADIR)
 	./scripts/generate_fake_logs.sh logfmt $(FAKE_LOG_SIZE) $(DATADIR)
 
