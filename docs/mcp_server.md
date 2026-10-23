@@ -42,3 +42,5 @@ MCP クライアントはサーバープロセスを起動し、stdin/stdout で
 ```
 
 `textindex` は先に `go build -o textindex ./cmd/textindex` などでビルドしてください。クライアントに登録後、`search` と `index_info` を利用できます。
+
+現時点で実装されている transport は stdio です。将来の Streamable HTTP 対応方針は [`mcp_streamable_http.md`](mcp_streamable_http.md) を参照してください。
