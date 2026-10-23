@@ -46,6 +46,8 @@ func main() {
 		err = runSearch(os.Args[2:])
 	case "web":
 		err = runWeb(os.Args[2:])
+	case "mcp":
+		err = runMCP(os.Args[2:])
 	case "help", "-h", "--help":
 		usage()
 		return
@@ -72,6 +74,7 @@ func usage() {
 	fmt.Fprintln(os.Stderr, "  browse <index-file> [--show N] [--context N]")
 	fmt.Fprintln(os.Stderr, "  search [flags] <index-file> <pattern>")
 	fmt.Fprintln(os.Stderr, "  web [--index FILE] [--addr ADDR] [--limit N] [--context N] [--min-chars N]")
+	fmt.Fprintln(os.Stderr, "  mcp [--index FILE]")
 	fmt.Fprintln(os.Stderr, "")
 	fmt.Fprintln(os.Stderr, "Index types:")
 	fmt.Fprintln(os.Stderr, "  --algo doubling|sais      FM-index with doubling or SA-IS suffix array")

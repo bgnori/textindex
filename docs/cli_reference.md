@@ -15,6 +15,7 @@ textindex <command> [args]
 - `browse`
 - `search`
 - `web`
+- `mcp`
 
 ---
 
@@ -151,3 +152,15 @@ textindex web [--index FILE] [--addr ADDR] [--limit N] [--context N] [--min-char
 - `--min-chars`（既定: `4`、1未満は1に補正）
 
 起動後、`http://localhost:8080` を開きます。
+
+---
+
+## `mcp` — MCP サーバー
+
+```bash
+textindex mcp [--index FILE]
+```
+
+- `--index`（既定: `data/moby_dick.idx`）: 起動時に読み込むインデックス
+- MCP の stdio transport で起動します。標準出力は MCP 通信に使うため、ログや検索結果は出力しません。
+- 提供ツールとクライアント設定例は [`mcp_server.md`](mcp_server.md) を参照してください。

@@ -25,6 +25,7 @@ make search-demo-moby-dick
 ## 詳細ドキュメント
 
 - CLI の全コマンド・オプション: [`docs/cli_reference.md`](docs/cli_reference.md)
+- MCP サーバー: [`docs/mcp_server.md`](docs/mcp_server.md)
 - テストデータ準備（Moby Dick / 上杉謙信 / Git / ゲノム / Kaggle / Fake ログ）: [`docs/datasets.md`](docs/datasets.md)
 - ライブラリ API: [`docs/library_api.md`](docs/library_api.md)
 - 性能計測: [`docs/performance_report.md`](docs/performance_report.md)
@@ -74,6 +75,9 @@ textindex search [--limit N] [--context N] [--positions] <index-file> <pattern>
 
 # Web UI
 textindex web [--index FILE] [--addr ADDR] [--limit N] [--context N] [--min-chars N]
+
+# MCP server (stdio)
+textindex mcp [--index FILE]
 ```
 
 > `search` のパターン解釈はバックエンド依存です。
